@@ -1,66 +1,263 @@
-.navbar{
-    width:100%;
+/* Navbar.css */
+.navbar {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content : space-between;
+    justify-content: space-between;
     background: #fff;
     padding: 15px 7%;
-    transition:0.5s;
+    transition: 0.5s;
+    position: relative;
 }
-.logo{
-    width:150px;
-    cursor:pointer;
+
+.logo {
+    width: 150px;
+    cursor: pointer;
+}
+.col{
+    color: red;
 }
 ul {
     flex: 1;
-    list-style:none;
-    text-align: center;
-
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
-ul li{
-    display: inline-block;
+
+ul li {
+    position: relative; /* Important for absolute positioning of the dropdown menu */
     margin: 10px 10px;
     font-size: 16px;
 }
-.toggle-icon{
+
+ul li a, ul li span {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+/* Hover state for menu items */
+ul li a:hover, ul li span:hover {
+    color: #007BFF; /* Change text color on hover */
+    /* background-color: #f0f0f0; Optional: Change background color on hover */
+}
+
+.toggle-icon {
     width: 50px;
     cursor: pointer;
-    margin-left:40px
+    margin-left: 40px;
+    transition: transform 0.3s;
 }
-.search-box{
+
+.toggle-icon:hover {
+    transform: scale(1.1); /* Scale up the icon on hover */
+}
+
+.search-box {
     display: flex;
     align-items: center;
     background: #242424;
-    padding:10px 20px;
-    border-radius: 50px ;
-
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s;
 }
-.search-box input{
-    padding:6px;
+
+.search-box input {
+    padding: 6px;
     background: transparent;
     border: 0;
-    outline:0;
+    outline: 0;
     color: #fff;
     font-size: 18px;
-    max-width:200px;
+    max-width: 200px;
 }
-.search-box input::placeholder{
-    color:#fff;
+
+.search-box input::placeholder {
+    color: #fff;
 }
-.search-box img{
-    width:20px;
+
+.search-box img {
+    width: 20px;
     cursor: pointer;
+    transition: transform 0.3s;
 }
-.dark .navbar{
+
+.search-box img:hover {
+    transform: scale(1.1); /* Scale up the search icon on hover */
+}
+
+.dark .navbar {
     background: #000;
     color: #fff;
 }
-.dark .search-box{
-    background:  #fff;
+
+.dark .search-box {
+    background: #fff;
 }
-.dark .search-box input{
-    color:#222;
-}
-.dark .search-box input::placeholder{
+
+.dark .search-box input {
     color: #222;
+}
+
+.dark .search-box input::placeholder {
+    color: #222;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position the dropdown below the parent */
+    left: 0;
+    background-color: #fff; /* Set default background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1000; /* Ensure the dropdown is above other elements */
+    display: flex;
+    flex-direction: column;
+    width: max-content; /* Ensure the dropdown menu width fits its content */
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    white-space: nowrap; /* Prevent text from wrapping to maintain the width */
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu li a {
+    color: #000; /* Set default text color */
+    text-decoration: none;
+}
+
+/* Hover state for dropdown menu items */
+.dropdown-menu li a:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Adjust colors for dark mode */
+.dark .dropdown-menu {
+    background-color: #333; /* Dark mode background color */
+}
+
+.dark .dropdown-menu li a {
+    color: #fff; /* Dark mode text color */
+}
+
+.dark .dropdown-menu li a:hover {
+    background-color: #444; /* Chrgb(68, 68, 68) background color on hover for dark mode */
+}
+
+.dropdown span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown .arrow {
+    margin-left: 5px;
+    font-size: 10px; /* Make the arrow smaller */
+    transition: transform 0.3s;
+}
+
+.dropdown:hover .arrow {
+    transform: rotate(180deg); /* Optional: Rotate the arrow when hovered */
+}
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+/* New toggle button styles */
+.menu-toggle {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    display: block;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1000;
+        padding: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu.visible {
+        display: flex;
+    }
+
+    ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    ul li {
+        margin: 10px 0;
+    }
+
+    .dropdown-menu {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+
+
+    .dark .menu {
+        background-color: #000;
+    }
+
+    .dark .dropdown-menu {
+        background-color: #000;
+    }
+
+    .dropdown:hover .arrow {
+        transform: none; /* Disable rotate on hover for mobile */
+    }
 }
