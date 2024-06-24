@@ -220,6 +220,7 @@ ul li a:hover, ul li span:hover {
         position: absolute;
         top: 60px; /* Adjust based on navbar height */
         left: 0;
+        right: 0;
         width: 100%;
         background-color: #fff;
         z-index: 1000;
