@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CustomCard } from './components/Card/Card.jsx';
 import './App.css';
 import { Projects } from './components/Card/products.jsx';
+import Footer from "./components/Footer/Footer.jsx";
 
 
 function App() {
@@ -44,10 +45,13 @@ function App() {
           />
         ))}
       </div>
+      <Footer />
     </div>
+    
+    
     
 
   )
 }
 
-export default App
+export default App;
