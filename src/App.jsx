@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react'
-import Navbar from './components/Navbar/Navbar'
-import { useState } from "react";
+// App.jsx
+import React, { useEffect, useState } from 'react';
+import Navbar from './components/Navbar/Navbar';
 import { CustomCard } from './components/Card/Card.jsx';
 import './App.css';
 import { Projects } from './components/Card/products.jsx';
 import Footer from "./components/Footer/Footer.jsx";
 
-
 function App() {
-  const current_theme= localStorage.getItem('current_theme');
-  const [theme,setTheme]= useState(current_theme?current_theme:'light');
-
+  const current_theme = localStorage.getItem('current_theme');
+  const [theme, setTheme] = useState(current_theme ? current_theme : 'light');
   const [filterTag, setFilterTag] = useState(null);
 
   const handleTagClick = (tag) => {
@@ -23,16 +21,15 @@ function App() {
       )
     : Projects;
 
-  useEffect(()=>{
-    localStorage.setItem('current_theme',theme);
+  useEffect(() => {
+    localStorage.setItem('current_theme', theme);
+  }, [theme]);
 
-  },[theme])
   return (
-    
-    <div className={`w-full flex flex-col  ${theme} `}>
-      <Navbar theme={theme} setTheme={setTheme}/>
-      
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className='h-screen'>
+    <div className={`w-full flex flex-col ${theme}`}>
+      <Navbar theme={theme} setTheme={setTheme} />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project) => (
           <CustomCard
             key={project.id}
@@ -45,13 +42,11 @@ function App() {
           />
         ))}
       </div>
-      <Footer />
+      
     </div>
-    
-    
-    
-
-  )
+    <Footer />
+    </div>
+  );
 }
 
 export default App;
